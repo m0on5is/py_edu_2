@@ -72,3 +72,4 @@ if __name__ == "__main__":
 
     audio_book = AudioBook("Аудиокнига1", "Автор2", 5.5)
     print(audio_book)
+    
