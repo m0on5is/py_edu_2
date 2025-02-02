@@ -2,21 +2,44 @@ class Book:
     """ Базовый класс книги. """
 
     def __init__(self, name: str, author: str):
-        self._name = name  # Название книги
-        self._author = author  # Автор книги
+        """
+        Инициализирует объект книги
+        :param name: Название книги
+        :param author: Имя автора книги
+        """
+        self._name = name
+        self._author = author
 
     @property
     def name(self):
+        """
+        Получение названия объекта книги
+        :return: Значение атрибута _name, представляющее название объекта.
+        """
         return self._name
 
     @property
     def author(self):
+        """
+        Получение имени автора объекта книги
+        :return: Значение атрибута _author, представляющее имя автора объекта.
+        """
         return self._author
 
     def __str__(self):
+        """
+        Метод определяет, как объект будет представлен в виде строки,
+        когда используется функция str() или print().
+        :return: Строковое представление, содержащее название книги и имя автора.
+        """
         return f"Книга {self.name}. Автор {self.author}"
 
     def __repr__(self):
+        """
+        Метод определяет, как объект будет представлен в виде строки,
+        когда используется функция repr().
+        :return: Строковое представление, которое может быть использовано для воссоздания объекта.
+        """
         return f"{self.__class__.__name__}(Книга={self.name!r}, Автор={self.author!r})"
 
 
@@ -24,15 +47,33 @@ class PaperBook(Book):
     """ Класс бумажной книги, наследуется от Book. """
 
     def __init__(self, name: str, author: str, pages: int):
+        """
+        Инициализирует объект бумажной книги, часть параметров наследуются
+        :param name: Название книги
+        :param author: Имя автора книги
+        :param pages: Количество страниц книги
+        """
         super().__init__(name, author)
-        self._pages = pages  # Количество страниц
+        self._pages = pages
 
     @property
     def pages(self):
+        """
+        Получение значения количества страниц объекта бумажной книги
+        :return: Значение атрибута _pages, представляющее количество страниц объекта.
+        """
         return self._pages
 
     @pages.setter
-    def pages(self, value):    # Проверка
+    def pages(self, value):
+        """
+        Метод является сеттером для свойства pages, устанавливая количество страниц для книги.
+        Также осуществляет проверку значения на определённые условия, при несоответствии выбрасывается исключение.
+        :param value: Количество страниц.
+        :raises TypeError: Если value не является целым числом.
+        :raises ValueError: Если value меньше или равно нулю.
+        :return: None.
+        """
         if not isinstance(value, int):
             raise TypeError("Количество страниц должно быть целым числом.")
         if value <= 0:
@@ -40,6 +81,10 @@ class PaperBook(Book):
         self._pages = value
 
     def __str__(self):
+        """
+        Определяет представление объекта в виде строки для функций str() и print().
+        :return: Строковое представление, содержащее название книги, имя автора и количество страниц.
+        """
         return f"Книга {self.name}. Автор {self.author}. Количество страниц: {self.pages}"
 
 
@@ -47,15 +92,33 @@ class AudioBook(Book):
     """ Класс аудиокниги, наследуется от Book. """
 
     def __init__(self, name: str, author: str, duration: float):
+        """
+        Инициализирует объект аудиокниги, часть параметров наследуются
+        :param name: Название книги
+        :param author: Имя автора книги
+        :param duration: Продолжительность аудиокниги в часах
+        """
         super().__init__(name, author)
-        self._duration = duration  # Продолжительность аудиокниги в часах
+        self._duration = duration
 
     @property
     def duration(self):
+        """
+        Получение продолжительности объекта аудиокниги
+        :return: Значение атрибута _duration, представляющее продолжительность объекта.
+        """
         return self._duration
 
     @duration.setter
-    def duration(self, value):     # Проверка
+    def duration(self, value):
+        """
+        Сеттер для свойства duration, устанавливающий продолжительность чтения для аудиокниги.
+        Также осуществляет проверку значения на определённые условия, при несоответствии выбрасывается исключение.
+        :param value: Продолжительность аудиокниги.
+        :raises TypeError: Если value не является числом с плавающей точкой.
+        :raises ValueError: Если value меньше или равно нулю.
+        :return: None.
+        """
         if not isinstance(value, float):
             raise TypeError("Время прослушивания должно быть числом с плавающей точкой.")
         if value <= 0:
@@ -63,6 +126,10 @@ class AudioBook(Book):
         self._duration = value
 
     def __str__(self):
+        """
+        Определяет представление объекта в виде строки для функций str() и print().
+        :return: Строковое представление, содержащее название аудиокниги, имя автора и продолжительность чтения.
+        """
         return f"Книга {self.name}. Автор {self.author}. Продолжительность: {self.duration} часов"
 
 
@@ -72,4 +139,3 @@ if __name__ == "__main__":
 
     audio_book = AudioBook("Аудиокнига1", "Автор2", 5.5)
     print(audio_book)
-    
